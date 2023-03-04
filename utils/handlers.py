@@ -3,11 +3,11 @@ import os
 from http import HTTPStatus
 
 import requests
-from requests import Response
 
 from configs import log_configured
 from configs.base import API_URL
 from exceptions import APIException, ServiceException
+from requests import Response
 from telegram.ext import ContextTypes
 
 logger = log_configured.getLogger(__name__)
@@ -42,7 +42,7 @@ async def send_subscription(context: ContextTypes.DEFAULT_TYPE) -> None:
 
 
 def make_request(url: str = API_URL) -> Response:
-    """Получение ответа от АПИ валют"""
+    """Получение ответа от АПИ валют."""
     resp = requests.get(url)
     if resp.status_code != HTTPStatus.OK:
         logger.error(f'Ошибочный ответ от сервиса курса валют: {resp.status_code}')

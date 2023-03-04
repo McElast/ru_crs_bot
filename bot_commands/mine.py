@@ -1,10 +1,9 @@
 """Получение курсов валют к рублю, выбранных пользователем."""
 from configs import log_configured
 from configs.base import CURRENCIES
+from exceptions import ServiceException
 from telegram import Update
 from telegram.ext import ContextTypes
-
-from exceptions import ServiceException
 from utils.handlers import remove_job_if_exists, send_subscription
 
 logger = log_configured.getLogger(__name__)
@@ -42,7 +41,7 @@ async def sub(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
                 send_subscription, int(context.args[0]),
                 chat_id=update.effective_chat.id,
                 name=str(update.effective_chat.id),
-                data=[int(context.args[0]), subbed_curs]
+                data=[int(context.args[0]), subbed_curs],
             )
 
         await context.bot.send_message(

@@ -1,5 +1,5 @@
 """Точка запуска бота."""
-from bot_commands import courses, help, start, sub, unsub
+from bot_commands import courses, help_command, start, sub, unsub
 from configs import log_configured
 from dotenv import load_dotenv
 from telegram.ext import ApplicationBuilder, CommandHandler
@@ -21,7 +21,7 @@ if __name__ == '__main__':
     application.add_handler(sub_handler)
     unsub_handler = CommandHandler('unsub', unsub)
     application.add_handler(unsub_handler)
-    help_handler = CommandHandler('help', help)
+    help_handler = CommandHandler('help', help_command)
     application.add_handler(help_handler)
 
     application.run_polling()
