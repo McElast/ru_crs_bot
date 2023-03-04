@@ -9,13 +9,13 @@ logger = log_configured.getLogger(__name__)
 async def courses(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Логика команды /courses."""
     if update.effective_chat is not None:
-        start_message: str = (
+        message: str = (
             f'Показываю курс рубля специально для тебя, {update.effective_chat.first_name}.'
         )
 
         await context.bot.send_message(
             chat_id=update.effective_chat.id,
-            text=start_message,
+            text=message,
         )
     else:
         logger.warning('Не получен ID чата при запросе /courses.')
