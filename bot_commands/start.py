@@ -1,8 +1,7 @@
 """Стартовая команда бота."""
+from configs import log_configured
 from telegram import Update
 from telegram.ext import ContextTypes
-
-from configs import log_configured
 
 logger = log_configured.getLogger(__name__)
 
@@ -12,8 +11,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     if update.effective_chat is not None:
         await context.bot.send_message(
             chat_id=update.effective_chat.id,
-            text='Показываю курс рубля.',
+            text=f'Показываю курс рубля специально для тебя, {update.effective_chat.first_name}.',
         )
     else:
         logger.warning('Не получен ID чата при запросе /start.')
-    print(322113, update.effective_chat)
