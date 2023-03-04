@@ -1,0 +1,4 @@
+[tool.mypy]
+python_version = '3.11'
+exclude = ['venv/', '.mypy_cache/']
+disallow_untyped_defs = true

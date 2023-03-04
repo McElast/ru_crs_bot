@@ -1,0 +1,6 @@
+[flake8]
+max-line-length = 121
+import-order-style = edited
+inline-quotes = '
+exclude = python3.*/**/,.venv,venv
+extend-ignore = FNE005,FNE007,FNE008,W504,A003,S101
