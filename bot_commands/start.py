@@ -14,7 +14,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
             '\n======Доступные команды======\n'
             '- /start - приветственная информация\n'
             '- /help - информация о функционале бота\n'
-            '- /courses - доступные курсы валют\n'
+            '- /courses - курсы всех валют к рублю\n'
             '- /mine - показать мои курсы валют'
         )
 
