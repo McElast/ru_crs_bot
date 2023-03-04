@@ -27,16 +27,20 @@ async def courses(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
         courses_date: str = datetime.strptime(
             resp.json()['Date'], '%Y-%m-%dT%H:%M:%S%z',
         ).strftime('%d %B, %Y %H:%M')
+
         bot_courses: dict = {}
-
         for currency in CURRENCIES:
-            bot_courses[resp.json()['Valute'][currency]['Name']]
-
-
-
+            api_currency_data = resp.json()['Valute'][currency]
+            bot_courses[currency] = (
+                f'{api_currency_data["Name"]}({api_currency_data["CharCode"]}) = '
+                f'{api_currency_data["Value"]:.2f}\n'
+            )
+        header: str = f'Актуальный курс валют на дату: {courses_date}.'
         message: str = (
-            f'Актуальный курс валют на дату: {courses_date}.\n'
-            f''
+            f'{header}\n'
+            f'{"=" * len(header)}\n'
+            f'{"".join(str(cur_data) for cur_data in bot_courses.values())}'
+            f'{"=" * len(header)}'
         )
 
         await context.bot.send_message(
