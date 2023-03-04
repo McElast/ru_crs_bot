@@ -13,7 +13,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
             f'Показываю курс рубля специально для тебя, {update.effective_chat.first_name}.'
             '\n======Доступные команды======\n'
             '- /start - приветственная информация\n'
-            '- /courses - доступные курсы валют'
+            '- /courses - доступные курсы валют\n'
             '- /mine - показать мои курсы валют'
         )
 
