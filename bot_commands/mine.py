@@ -22,10 +22,10 @@ async def sub(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
         )
 
         if context.args and context.args[0].isnumeric():
-            if int(context.args[0]) <= 0:
-                logger.warning('Первый параметр в подписке меньше или равен нулю.')
+            if int(context.args[0]) <= 5:
+                logger.warning('Первый параметр в подписке меньше или равен 5 сек.')
                 raise ServiceException(
-                    f'Установите периодичность подписки числом,  большим нуля, а не {context.args[0]}',
+                    f'Установите периодичность подписки числом,  большим 5 сек, а не {context.args[0]}',
                 )
             subbed_curs: list = []
             for param in context.args[1:]:
@@ -42,7 +42,7 @@ async def sub(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
                 send_subscription, int(context.args[0]),
                 chat_id=update.effective_chat.id,
                 name=str(update.effective_chat.id),
-                data=int(context.args[0]),
+                data=[int(context.args[0]), subbed_curs]
             )
 
         await context.bot.send_message(

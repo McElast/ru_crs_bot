@@ -2,15 +2,11 @@
 import locale
 from datetime import datetime
 
-import requests
-
 from configs import log_configured
-from configs.base import API_URL, CURRENCIES
-from http import HTTPStatus
+from configs.base import CURRENCIES
 from telegram import Update
 from telegram.ext import ContextTypes
-
-from exceptions import ServiceException
+from utils.handlers import make_request
 
 logger = log_configured.getLogger(__name__)
 locale.setlocale(locale.LC_ALL, ('ru_RU', 'UTF-8'))
@@ -19,10 +15,7 @@ locale.setlocale(locale.LC_ALL, ('ru_RU', 'UTF-8'))
 async def courses(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Логика команды /courses."""
     if update.effective_chat is not None:
-        resp = requests.get(API_URL)
-        if resp.status_code != HTTPStatus.OK:
-            logger.error(f'Ошибочный ответ от сервиса курса валют: {resp.status_code}')
-            raise ServiceException(f'Ошибка ответа от {API_URL}: {resp.text}')
+        resp = make_request()
 
         courses_date: str = datetime.strptime(
             resp.json()['Date'], '%Y-%m-%dT%H:%M:%S%z',
