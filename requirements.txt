@@ -1,4 +1,4 @@
-python-telegram-bot==20.1
+python-telegram-bot[job-queue]==20.1
 python-dotenv==1.0.0
 flake8==5.0.4
 flake8-docstrings==1.7.0

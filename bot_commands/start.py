@@ -15,7 +15,8 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
             '- /start - приветственная информация\n'
             '- /help - информация о функционале бота\n'
             '- /courses - курсы всех валют к рублю\n'
-            '- /sub - подписаться на рассылку'
+            '- /sub - подписаться на рассылку\n'
+            '- /unsub - отписаться от рассылки'
         )
 
         await context.bot.send_message(
