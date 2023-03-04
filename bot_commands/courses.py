@@ -35,13 +35,21 @@ async def courses(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
                 f'{api_currency_data["Name"]}({api_currency_data["CharCode"]}) = '
                 f'{api_currency_data["Value"]:.2f}\n'
             )
-        header: str = f'Актуальный курс валют на дату: {courses_date}.'
-        message: str = (
-            f'{header}\n'
-            f'{"=" * len(header)}\n'
-            f'{"".join(str(cur_data) for cur_data in bot_courses.values())}'
-            f'{"=" * len(header)}'
-        )
+        message: str = ''
+        if not context.args:
+            header: str = f'Актуальный курс валют на дату: {courses_date}.'
+            message = (
+                f'{header}\n'
+                f'{"=" * len(header)}\n'
+                f'{"".join(str(cur_data) for cur_data in bot_courses.values())}'
+                f'{"=" * len(header)}'
+            )
+        else:
+            for param in context.args:
+                if param.upper() in CURRENCIES:
+                    message += f'{bot_courses[param.upper()]}'
+                else:
+                    logger.warning(f'Запрошена недопустимая валюта {param.upper()}')
 
         await context.bot.send_message(
             chat_id=update.effective_chat.id,

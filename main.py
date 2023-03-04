@@ -17,7 +17,7 @@ if __name__ == '__main__':
     application.add_handler(start_handler)
     courses_handler = CommandHandler('courses', courses)
     application.add_handler(courses_handler)
-    mine_handler = CommandHandler('mine', mine)
+    mine_handler = CommandHandler('sub', mine)
     application.add_handler(mine_handler)
     help_handler = CommandHandler('help', help)
     application.add_handler(help_handler)

@@ -18,4 +18,4 @@ async def mine(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
             text=message,
         )
     else:
-        logger.warning('Не получен ID чата при запросе /mine.')
+        logger.warning('Не получен ID чата при запросе /sub.')
