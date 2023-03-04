@@ -37,7 +37,8 @@ async def sub(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
             )
 
             await remove_job_if_exists(str(update.effective_chat.id), context)
-            context.job_queue.run_repeating(
+
+            context.job_queue.run_repeating(  # type: ignore
                 send_subscription, int(context.args[0]),
                 chat_id=update.effective_chat.id,
                 name=str(update.effective_chat.id),
@@ -54,9 +55,12 @@ async def sub(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 
 async def unsub(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Отменить подписку."""
-    job_removed = await remove_job_if_exists(str(update.effective_chat.id), context)
-    message = 'Подписка отменена' if job_removed else 'Подписки не было. Отменять нечего.'
-    await context.bot.send_message(
-        chat_id=update.effective_chat.id,
-        text=message,
-    )
+    if update.effective_chat is not None:
+        job_removed = await remove_job_if_exists(str(update.effective_chat.id), context)
+        message = 'Подписка отменена' if job_removed else 'Подписки не было. Отменять нечего.'
+        await context.bot.send_message(
+            chat_id=update.effective_chat.id,
+            text=message,
+        )
+    else:
+        logger.warning('В unsub не передан effective_chat.')
