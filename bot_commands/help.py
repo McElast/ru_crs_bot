@@ -14,7 +14,8 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
             '1. Доллар США (USD)\n'
             '2. Евро (EUR)\n'
             '3. Китайский юань (CNY)\n'
-            '4. Белорусский рубль (BYN)'
+            '4. Белорусский рубль (BYN)\n'
+            'На выбранные валюты можно подписаться (в том числе не на все)'
         )
 
         await context.bot.send_message(
