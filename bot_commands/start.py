@@ -1,6 +1,4 @@
 """Стартовая команда бота."""
-import telegram
-
 from configs import log_configured
 from telegram import Update
 from telegram.ext import ContextTypes

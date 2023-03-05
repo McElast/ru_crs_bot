@@ -1,5 +1,4 @@
 """Получение доступных курсов валют."""
-import locale
 from datetime import datetime
 
 from configs import log_configured
@@ -9,7 +8,6 @@ from telegram.ext import ContextTypes
 from utils.handlers import make_request
 
 logger = log_configured.getLogger(__name__)
-locale.setlocale(locale.LC_ALL, ('ru_RU', 'UTF-8'))
 
 
 async def courses(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:

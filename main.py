@@ -1,4 +1,6 @@
 """Точка запуска бота."""
+import locale
+
 from bot_commands import courses, help_command, start, sub, unsub
 from configs import log_configured
 from dotenv import load_dotenv
@@ -6,6 +8,7 @@ from telegram.ext import ApplicationBuilder, CommandHandler
 from utils.handlers import get_token
 
 logger = log_configured.getLogger(__name__)
+locale.setlocale(locale.LC_ALL, ('ru_RU', 'UTF-8'))
 
 load_dotenv()
 TOKEN = get_token('TG_TOKEN')
