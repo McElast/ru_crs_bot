@@ -13,7 +13,7 @@ async def sub(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Логика команды /sub."""
     if update.effective_chat is not None:
         message: str = (
-            'Можно подписаться на следующие валюты:\n'
+            '<b>Можно подписаться на следующие валюты:</b>\n'
             f'{" ".join((cur for cur in CURRENCIES))}\n'
             'Делается так: /sub 10 USD CNY\n'
             'Первый параметр - время в секундах, остальные - валюты для подписки\n'
@@ -33,7 +33,7 @@ async def sub(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
                 else:
                     logger.warning(f'Игнорируем недоступную валюту для рассылки: {param.upper()}')
             message = (
-                f'Подписан на валюты = {*subbed_curs, } =.\nРассылка раз в {context.args[0]} секунд.'
+                f'Подписан на валюты = <b>{*subbed_curs, }</b> =.\nРассылка раз в {context.args[0]} секунд.'
             )
 
             await remove_job_if_exists(str(update.effective_chat.id), context)
@@ -47,7 +47,7 @@ async def sub(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 
         await context.bot.send_message(
             chat_id=update.effective_chat.id,
-            text=message,
+            text=message, parse_mode='HTML',
         )
     else:
         logger.warning('Не получен ID чата при запросе /sub.')
