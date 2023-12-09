@@ -3,6 +3,7 @@ from datetime import datetime
 
 from configs import log_configured
 from configs.base import CURRENCIES
+from requests import Response
 from telegram import Update
 from telegram.ext import ContextTypes
 from utils.handlers import make_request
@@ -13,7 +14,7 @@ logger = log_configured.getLogger(__name__)
 async def courses(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Логика команды /courses."""
     if update.effective_chat is not None:
-        resp = make_request()
+        resp: Response = make_request()
 
         courses_date: str = datetime.strptime(
             resp.json()['Date'], '%Y-%m-%dT%H:%M:%S%z',
@@ -21,7 +22,7 @@ async def courses(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 
         bot_courses: dict = {}
         for currency in CURRENCIES:
-            api_currency_data = resp.json()['Valute'][currency]
+            api_currency_data: dict = resp.json()['Valute'][currency]
             bot_courses[currency] = (
                 f'{api_currency_data["Name"]}({api_currency_data["CharCode"]}) = '
                 f'{api_currency_data["Value"]:.2f}\n'
